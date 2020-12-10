@@ -1,17 +1,25 @@
-import React, {Fragment} from 'react';
+import React, { useState } from 'react';
 import Card from '../Card/Card';
+import {useHistory} from 'react-router-dom';
 
-function CardList({ pokemons }) {
+
+function CardList({ pokemon, id }) {
+    const history = useHistory();
+    const [url] = useState('https://pokeapi.co/api/v2/pokemon/')
+
     return (
         <div className="flex flex-wrap items-center justify-center">
             {
-                pokemons.map((monster, i) => {
+                pokemon.map((monster, i) => {
                     return (
                     <Card 
-                        key={i}
+                        key={monster.name}
                         name={monster.forms[0].name}
                         type={monster.types.map( type => type.type.name)}
                         sprite={monster.sprites.front_default}
+                        url={monster.url}
+                        onClick = {() => history.push(`/${pokemon.id}`)}
+
                     />);
                 })
             }
