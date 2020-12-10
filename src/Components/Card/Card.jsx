@@ -1,12 +1,14 @@
 import React from 'react';
 import './Card.scss';
 import Tilt from 'react-tilt'
+import {useHistory } from 'react-router-dom'
 
-function Card({ name, type, sprite }) {
+function Card({ name, type, sprite, id }) {
+    const history = useHistory();
     return (
         <Tilt className="Tilt pa2">
             <div className="Tilt-inner tc w5 bg-red dib br3 pa3 ma2 dim bw2 shadow-5 pointer">
-                <div className="flex flex-column items-center">
+                <div onClick = {() => history.push(`https://pokeapi.co/api/v2/pokemon/${id}`)} className="flex flex-column items-center">
                     <img src={sprite} className='bg-light-yellow br-100 ba b--black-10' alt={`${name}`}/>             
                     <h2 className="bg-yellow br1 ma2 pa2">{name}</h2>
                     <div className="h3 flex flex-column justify-center">
