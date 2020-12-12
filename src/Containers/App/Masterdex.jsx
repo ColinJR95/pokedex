@@ -99,8 +99,7 @@ function App() {
               <button onClick={next}>Next</button>
             </div>
             <div className="flex items-center justify-center">
-              <Pokemon />
-               <CardList pokemon={filteredPokemons} onClick = {() => history.push(`/${filteredPokemons.id}`)}/>
+               <CardList pokemon={filteredPokemons} />
 
             </div>
             <div className="btn">

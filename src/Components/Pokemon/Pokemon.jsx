@@ -3,12 +3,11 @@ import { Typography, Link, CircularProgress, Button } from "@material-ui/core";
 import axios from "axios";
 import {useHistory} from 'react-router-dom'
 
-const Pokemon = (props) => {
-  const {pokemonId} = props
+const Pokemon = ({pokemonId, handleClose }) => {
   const history = useHistory();
   // const { match, history } = props;
   // const { params } = match;
-  // const { pokemonId } = params;
+  // const { pokemonId } = params; 
   const [pokemon, setPokemon] = useState(undefined);
 
   useEffect(() => {
@@ -28,15 +27,15 @@ name.charAt(0).toUpperCase() + name.slice(1)
 
   const generatePokemonJSX = (pokemon) => {
     const { name, id, species, height, weight, types, sprites } = pokemon;
-    const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
+    const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
     const { front_default } = sprites;
     return (
       <>
-        <Typography variant="h1">
+        <Typography variant="h3">
           {`${id}.`} {toFirstCharUpperCase(name)}
-          <img src={front_default} alt="" />
+          {/* <img src={front_default} alt="" /> */}
         </Typography>
-        <img style={{ width: "300px", height: "300px" }} src={fullImageUrl} alt="" />
+        <img style={{ width: "200px", height: "200px" }} src={fullImageUrl} alt="" />
         <Typography variant="h3">Pokemon Info</Typography>
         <Typography>
           {"Species: "}
@@ -44,7 +43,7 @@ name.charAt(0).toUpperCase() + name.slice(1)
         </Typography>
         <Typography>Height: {height} </Typography>
         <Typography>Weight: {weight} </Typography>
-        <Typography variant="h6"> Types:</Typography>
+        <Typography variant="h3"> Types:</Typography>
         {types.map((typeInfo) => {
           const { type } = typeInfo;
           const { name } = type;
@@ -59,7 +58,7 @@ name.charAt(0).toUpperCase() + name.slice(1)
       {pokemon !== undefined && pokemon && generatePokemonJSX(pokemon)}
       {pokemon === false && <Typography> Pokemon not found</Typography>}
       {pokemon !== undefined && (
-        <Button variant="contained" onClick={() => history.push("/")}>
+        <Button variant="contained" onClick={handleClose}>
           back to pokedex
         </Button>
       )}
