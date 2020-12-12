@@ -21,7 +21,7 @@ const ResetPasswordConfirm = ({match, reset_password_confirm}) => {
         const uid = match.params.uid;
         const token = match.params.token;
 
-        match.reset_password_confirm(uid, token, new_password, re_new_password);
+        reset_password_confirm(uid, token, new_password, re_new_password);
         setRequestSent(true);
     };
 
