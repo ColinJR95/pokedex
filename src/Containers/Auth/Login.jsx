@@ -23,7 +23,7 @@ const Login = ({ login, isAuthenticated }) => {
         return <Redirect to='/pokemon' />;
     
     return (
-        <div className='container mt-5'>
+        <div className='login'>
             <h1>Sign In</h1>
             <p>Sign into your Account</p>
             <form onSubmit={e => onSubmit(e)}>
@@ -50,7 +50,7 @@ const Login = ({ login, isAuthenticated }) => {
                         required
                     />
                 </div>
-                <button className='btn btn-primary' type='submit'>Login</button>
+                <button className='register_btn' type='submit'>Login</button>
             </form>
             <p className='mt-3'>
             Don't have an account? <Link to='/signup'>Sign Up</Link>

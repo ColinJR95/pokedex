@@ -17,6 +17,7 @@ import {
     AUTHENTICATED_SUCCESS
 } from './types';
 
+const baseUrl = 'https://safe-atoll-53943.herokuapp.com'
 export const checkAuthenticated = () => async dispatch => {
     if (typeof window == 'undefined') {
         dispatch({
@@ -34,7 +35,7 @@ export const checkAuthenticated = () => async dispatch => {
         const body = JSON.stringify({ token: localStorage.getItem('access') });
     
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/verify/`, body, config);
+            const res = await axios.post(`${baseUrl}/auth/jwt/verify/`, body, config);
     
             if (res.data.code !== 'token_not_valid') {
                 dispatch({
@@ -68,7 +69,7 @@ export const load_user = () => async dispatch => {
         };
 
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/me/`, config);
+            const res = await axios.get(`${baseUrl}/auth/users/me/`, config);
 
             dispatch({
                 type: USER_LOADED_SUCCESS,
@@ -96,7 +97,7 @@ export const login = (email, password) => async dispatch => {
     const body = JSON.stringify({ email, password });
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/`, body, config);
+        const res = await axios.post(`${baseUrl}/auth/jwt/create/`, body, config);
 
         dispatch({
             type: LOGIN_SUCCESS,
@@ -119,9 +120,9 @@ export const signup = ({ name, email, password, re_password }) => async dispatch
     }
 
     const body = JSON.stringify({ name, email, password, re_password }); 
-
+    console.log('this is the body', body)   
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`, body, config);
+        const res = await axios.post(`${baseUrl}/auth/users/`, body, config);
 
         dispatch({
             type: SIGNUP_SUCCESS,
@@ -129,7 +130,8 @@ export const signup = ({ name, email, password, re_password }) => async dispatch
         });
     } catch (err) {
         dispatch({
-            type: SIGNUP_FAIL
+            type: SIGNUP_FAIL,
+            payload: err
         });
     }
 };
@@ -144,7 +146,7 @@ export const verify = (uid, token) => async dispatch => {
     const body = JSON.stringify({ uid, token }); 
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/activation/`, body, config);
+        const res = await axios.post(`${baseUrl}/auth/users/activation/`, body, config);
 
         dispatch({
             type: ACTIVATION_SUCCESS,
@@ -167,7 +169,7 @@ export const reset_password = (email) => async dispatch => {
     const body = JSON.stringify({ email }); 
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password/`, body, config);
+        const res = await axios.post(`${baseUrl}/auth/users/reset_password/`, body, config);
 
         dispatch({
             type: RESET_PASSWORD_SUCCESS,
@@ -190,7 +192,7 @@ export const reset_password_confirm = (uid, token, new_password, re_new_password
     const body = JSON.stringify({ uid, token, new_password, re_new_password }); 
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password_confirm/`, body, config);
+        const res = await axios.post(`${baseUrl}/auth/users/reset_password_confirm/`, body, config);
 
         dispatch({
             type: RESET_PASSWORD_CONFIRM_SUCCESS,

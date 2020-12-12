@@ -40,6 +40,7 @@ export default function(state = initialState, action) {
                 user: payload
             }
         case SIGNUP_SUCCESS:
+        console.log(payload)
             return {
                 ...state,
                 isAuthenticated: false
@@ -54,7 +55,7 @@ export default function(state = initialState, action) {
                 ...state,
                 user: null
             }
-        case SIGNUP_FAIL:
+        case SIGNUP_FAIL: console.log(payload)
         case LOGIN_FAIL:
         case LOGOUT:
             localStorage.removeItem('access');

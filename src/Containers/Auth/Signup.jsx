@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { signup } from '../../actions/auth';
+import './Signup.scss'
 
 const Signup = ({ signup, isAuthenticated }) => {
     const [formData, setFormData] = useState({
@@ -25,14 +26,14 @@ const Signup = ({ signup, isAuthenticated }) => {
             setAccountCreated(true);
         }
     };
-
+    
     if (isAuthenticated)
         return <Redirect to='/' />;
     if (accountCreated)
         return <Redirect to='login' />;
     
     return (
-        <div className='container mt-5'>
+        <div className='login'>
             <h1>Sign Up</h1>
             <p>Create your Account</p>
             <form onSubmit={e => onSubmit(e)}>
@@ -82,7 +83,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                         required
                     />
                 </div>
-                <button className='btn btn-primary' type='submit'>Register</button>
+                <button className='register_btn'  type='submit'>Register</button>
             </form>
             <p className='mt-3'>
                 Already have an account? <Link to='/login'>Sign In</Link>

@@ -2,43 +2,33 @@ import React, { Fragment } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
+import './NavBar.scss'
 
 const Navbar = ({ isAuthenticated, logout }) => {
     const authLinks = (
         <li className="nav-item">
-            <Link className='nav-link' onClick={logout} to='/'>Logout</Link>
+            <Link className='nav_options' onClick={logout} to='/'>Logout</Link>
         </li>
     );
 
     const guestLinks = (
         <Fragment>
             <li className="nav-item">
-                <NavLink className="nav-link" exact to='/login'>Login</NavLink>
+                <NavLink className="nav_options" exact to='/login'>Login</NavLink>
             </li>
             <li className="nav-item">
-                <NavLink className="nav-link" exact to='/signup'>Sign Up</NavLink>
+                <NavLink className="nav_options" exact to='/signup'>Sign Up</NavLink>
             </li>
         </Fragment>
     );
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link className="navbar-brand" to='/'>Full-Stack PokeDex</Link>
-            <button 
-                className="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
+        <nav className="navbar-header">
+            <Link className="header_logo" to='/'>PokeDex</Link>
+            <div className="new-nav">
+                <ul className="nav_options">
                     <li className="nav-item">
-                        <NavLink className="nav-link" exact to='/'>Home</NavLink>
+                        <NavLink className="nav_options" exact to='/'>Home</NavLink>
                     </li>
                     { <Fragment>{ isAuthenticated ? authLinks : guestLinks }</Fragment> }
                 </ul>
